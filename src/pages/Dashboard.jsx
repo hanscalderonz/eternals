@@ -15,10 +15,11 @@ import DashboardCard06 from '../partials/dashboard/DashboardCard06';
 import DashboardCard07 from '../partials/dashboard/DashboardCard07';
 import DashboardCard08 from '../partials/dashboard/DashboardCard08';
 import DashboardCard09 from '../partials/dashboard/DashboardCard09';
-import DashboardCard10 from '../partials/dashboard/DashboardCard10';
-import DashboardCard11 from '../partials/dashboard/DashboardCard11';
-import DashboardCard12 from '../partials/dashboard/DashboardCard12';
-import DashboardCard13 from '../partials/dashboard/DashboardCard13';
+// import DashboardCard11 from '../partials/dashboard/DashboardCard11';
+// import DashboardCard12 from '../partials/dashboard/DashboardCard12';
+// import DashboardCard13 from '../partials/dashboard/DashboardCard13';
+import OosProducts from '../partials/dashboard/OosProducts';
+import TopProducts from '../partials/dashboard/TopProducts';
 // import Banner from '../partials/Banner';
 
 function Dashboard() {
@@ -86,13 +87,15 @@ function Dashboard() {
               {/* Stacked bar chart (Sales VS Refunds) */}
               <DashboardCard09 />
               {/* Card (Customers) */}
-              <DashboardCard10 />
+              <OosProducts />
+              <TopProducts />
+              
               {/* Card (Reasons for Refunds) */}
-              <DashboardCard11 />
+              {/* <DashboardCard11 /> */}
               {/* Card (Recent Activity) */}
-              <DashboardCard12 />
+              {/* <DashboardCard12 /> */}
               {/* Card (Income/Expenses) */}
-              <DashboardCard13 />
+              {/* <DashboardCard13 /> */}
               
             </div>
 

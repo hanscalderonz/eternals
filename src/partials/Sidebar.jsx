@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
-
 import SidebarLinkGroup from './SidebarLinkGroup';
 import instaleap from '../images/favicon.png'
 
@@ -76,7 +75,10 @@ function Sidebar({
             </svg>
           </button>
           {/* Logo */}
-          <NavLink end to="/" className="block">
+          <NavLink style={{
+            display:'block',
+            margin:'auto'
+          }} end to="/" className="block">
             <img src={instaleap} alt="" />
           </NavLink>
         </div>

@@ -3,14 +3,17 @@ import SearchModal from './header/SearchModal';
 import Notifications from './header/Notifications';
 import Help from './header/Help';
 import UserMenu from './header/UserMenu';
-
+import "antd/dist/antd.css";
+import {Switch} from 'antd'
 function Header({
   sidebarOpen,
   setSidebarOpen
 }) {
 
   const [searchModalOpen, setSearchModalOpen] = useState(false)
-
+  function onChange(checked) {
+    console.log(`switch to ${checked}`);
+  }
   return (
     <header className="sticky top-0 bg-white border-b border-slate-200 z-30">
       <div className="px-4 sm:px-6 lg:px-8">
@@ -40,6 +43,7 @@ function Header({
 
           {/* Header: Right side */}
           <div className="flex items-center">
+          <Switch defaultChecked onChange={onChange} />
 
             {/* <button
               className={`w-8 h-8 flex items-center justify-center bg-slate-100 hover:bg-slate-200 transition duration-150 rounded-full ml-3 ${searchModalOpen && 'bg-slate-200'}`}
@@ -56,6 +60,8 @@ function Header({
             <Notifications />
             <Help /> */}
             {/*  Divider */}
+
+
             <hr className="w-px h-6 bg-slate-200 mx-3" />
             <UserMenu />
 
