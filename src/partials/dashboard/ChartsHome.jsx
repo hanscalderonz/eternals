@@ -1,10 +1,8 @@
 import React from 'react';
 import BarChart from '../../charts/BarChart01';
-
-// Import utilities
 import { tailwindConfig } from '../../utils/Utils';
 
-function DashboardCard04() {
+function ChartsHome() {
 
   const chartData = {
     labels: [
@@ -14,22 +12,22 @@ function DashboardCard04() {
     datasets: [
       // Light blue bars
       {
-        label: 'Direct',
+        label: 'Demo',
         data: [
           800, 1600, 900, 1300, 1950, 1700,
         ],
-        backgroundColor: tailwindConfig().theme.colors.blue[400],
+        backgroundColor:"orange",
         hoverBackgroundColor: tailwindConfig().theme.colors.blue[500],
         barPercentage: 0.66,
         categoryPercentage: 0.66,
       },
       // Blue bars
       {
-        label: 'Indirect',
+        label: 'demo',
         data: [
           4900, 2600, 5350, 4800, 5200, 4800,
         ],
-        backgroundColor: tailwindConfig().theme.colors.indigo[500],
+        backgroundColor: "orange",
         hoverBackgroundColor: tailwindConfig().theme.colors.indigo[600],
         barPercentage: 0.66,
         categoryPercentage: 0.66,
@@ -40,7 +38,7 @@ function DashboardCard04() {
   return (
     <div className="flex flex-col col-span-full sm:col-span-6 bg-white shadow-lg rounded-sm border border-slate-200">
       <header className="px-5 py-4 border-b border-slate-100">
-        <h2 className="font-semibold text-slate-800">Direct VS Indirect</h2>
+        <h2 className="font-semibold text-slate-800">Infull last 7 days</h2>
       </header>
       {/* Chart built with Chart.js 3 */}
       {/* Change the height attribute to adjust the chart height */}
@@ -49,4 +47,4 @@ function DashboardCard04() {
   );
 }
 
-export default DashboardCard04;
+export default ChartsHome;
