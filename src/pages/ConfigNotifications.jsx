@@ -3,14 +3,20 @@ import Sidebar from '../partials/Sidebar';
 import Header from '../partials/Header';
 import TableNotifications from '../partials/dashboard/TableNotifications';
 import { Menu } from 'antd';
-import { Drawer, Button, Space, Radio, Input, Checkbox, Row, Col, DatePicker } from 'antd';
+import { Drawer, Button, Space, Input, Checkbox, Row, Col, DatePicker } from 'antd';
 import {PlusOutlined} from '@ant-design/icons'
 
-import { MultiSelect } from 'primereact/multiselect';
+import Select from '@mui/material/Select';
+import OutlinedInput from '@mui/material/OutlinedInput';
+import MenuItem from '@mui/material/MenuItem';
+import ListItemText from '@mui/material/ListItemText';
+import FormControl from '@mui/material/FormControl';
+import InputLabel from '@mui/material/InputLabel';
+
 import { Table } from 'antd';
 import { IoCalendarOutline } from "react-icons/io5";
 import { ImStack, ImFileText2 } from "react-icons/im";
-const { Column, ColumnGroup } = Table;
+const { Column } = Table;
 const { RangePicker } = DatePicker;
  
                  
@@ -46,7 +52,6 @@ function ConfigNotifications() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [visible, setVisible] = useState(false);
   const [size, setSize] = useState();
-  const [selectedStores, setSelectedStores] = useState(null);
   
 
   const showDrawer = () => {
@@ -69,12 +74,45 @@ function ConfigNotifications() {
     setVisible(false);
   };
   const stores = [
-    { name: 'Av chilacos', code: 'ac' },
-    { name: 'Toberin', code: 'tb' },
-    { name: 'Cluster Antioquia', code: 'ca' }
-];
+    'Av chilacos',
+    'Toberin',
+    'Cluster Antioquia'
+  ];
+
+const [age, setAge] = React.useState('');
+const [a, setA] = React.useState('');
 
 
+  const handleChangeConfig = (event) => {
+    setA(event.target.value);
+  };
+
+  const handleChange = (event) => {
+    setAge(event.target.value);
+  };
+
+  const [personName, setPersonName] = React.useState([]);
+
+  const ITEM_HEIGHT = 48;
+  const ITEM_PADDING_TOP = 8;
+  const MenuProps = {
+    PaperProps: {
+      style: {
+        maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+        width: 250,
+      },
+    },
+  };
+
+const handleChangeStore = (event) => {
+  const {
+    target: { value },
+  } = event;
+  setPersonName(
+    // On autofill we get a stringified value.
+    typeof value === 'string' ? value.split(',') : value,
+  );
+}
 
   return (
     <div className="flex h-screen overflow-hidden">
@@ -120,13 +158,51 @@ function ConfigNotifications() {
             <Drawer
              title="Configurar nueva alerta" size={size} placement="right" onClose={onClose} visible={visible}>
             <div>
-                <p>Tienda</p>
-            </div> 
+              <label><b>Tienda</b></label><br/>
+              <FormControl sx={{ m: 1, width: 300 }}>
+                <InputLabel id="demo-multiple-checkbox-label">Seleccione</InputLabel>
+                <Select
+                  labelId="demo-multiple-checkbox-label"
+                  id="demo-multiple-checkbox"
+                  multiple
+                  value={personName}
+                  onChange={handleChangeStore}
+                  input={<OutlinedInput label="Tag" />}
+                  renderValue={(selected) => selected.join(', ')}
+                  MenuProps={MenuProps}
+                >
+                  {stores.map((name) => (
+                    <MenuItem key={name} value={name}>
+                      <ListItemText primary={name} />
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+            </div>
+            
+            <div>
+              <label><b>Tipo de consulta</b></label><br/>
+              <FormControl sx={{ m: 1, minWidth: 300 }}>
+                <InputLabel id="demo-simple-select-autowidth-label">Seleccione</InputLabel>
+                <Select
+                  labelId="demo-simple-select-autowidth-label"
+                  id="demo-simple-select-autowidth"
+                  value={age}
+                  onChange={handleChange}
+                  autoWidth
+                  label="Age"
+                >
+                  <MenuItem value={10}>Top 20 productos OOS</MenuItem>
+                  <MenuItem value={21}>Top 20 productos vendidos</MenuItem>
+                  <MenuItem value={22}>Productos de una lista</MenuItem>
+                </Select>
+              </FormControl>
+            </div>
 
             <div>
             <div className='flex items-center gap-2 mb-6'>
             <ImFileText2 />
-              <p className='mb-0'>Reglas de la consulta</p>
+              <p className='mb-0'><b>Reglas de la consulta</b></p>
              </div>  
                
               <Table pagination={false} dataSource={data}>
@@ -146,15 +222,34 @@ function ConfigNotifications() {
 
             </div>
 
+            <div>
+              <label><b>Frecuencia de la consulta</b></label><br/>
+              <FormControl sx={{ m: 1, minWidth: 300 }}>
+                <InputLabel id="demo-simple-select-autowidth-label">Seleccione</InputLabel>
+                <Select
+                  labelId="demo-simple-select-autowidth-label"
+                  id="demo-simple-select-autowidth"
+                  value={a}
+                  onChange={handleChangeConfig}
+                  autoWidth
+                  label="Age"
+                >
+                  <MenuItem value={10}>Cada hora</MenuItem>
+                  <MenuItem value={21}>Con el evento</MenuItem>
+                  <MenuItem value={22}>Hora especifica</MenuItem>
+                </Select>
+              </FormControl>
+            </div>
+
             <div className=' grid grid-cols-3 gap-2 mt-10'>
              <div className='flex items-center gap-2'>
              <IoCalendarOutline />    
-             <p className='mb-0'> Frecuencia de la consulta</p>    
+             <p className='mb-0'> <b>Hora de la alerta</b></p>
             </div>   
             
             <div className='flex gap-3 '>
-               <Input style={{ width: '40%' }} defaultValue="10:00" />:   
-               <Input style={{ width: '40%' }} defaultValue="5:00" />   
+               <Input style={{ width: '40%' }} defaultValue="10:00" />:
+               <Input style={{ width: '40%' }} defaultValue="5:00" />
             </div>
 
             <div className='flex items-center'>
@@ -175,7 +270,7 @@ function ConfigNotifications() {
             <div className='grid grid-cols-3 mt-10' >
             <div className='flex items-center gap-2'>
             <IoCalendarOutline /> 
-            <p className='mb-0'>Alerta Activa</p>    
+            <p className='mb-0'><b>Alerta Activa</b></p>
             </div>  
 
             <div>
@@ -191,7 +286,7 @@ function ConfigNotifications() {
             <div className='flex items-center mt-10 gap-10'>
                 <div className='flex items-center gap-2 '>
                  <ImStack />   
-                <p className='mb-0'>Canal</p>    
+                <p className='mb-0'><b>Canal</b></p>
                 </div>
                 <div className='flex items-center'>
                 <Checkbox.Group onChange={onChange}>
@@ -226,8 +321,6 @@ function ConfigNotifications() {
             </div>
             <div className="grid  gap-6 mt-8">
 
-              
-              {/* Bar chart (Direct vs Indirect) */}
               <TableNotifications />
            
             </div>
