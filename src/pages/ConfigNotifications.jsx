@@ -5,13 +5,47 @@ import TableNotifications from '../partials/dashboard/TableNotifications';
 import { Menu } from 'antd';
 import { Drawer, Button, Space, Radio } from 'antd';
 import {PlusOutlined} from '@ant-design/icons'
+
+import { MultiSelect } from 'primereact/multiselect';
+import { Table } from 'antd';
+
+const { Column, ColumnGroup } = Table;
+ 
                  
                   
 function ConfigNotifications() {
 
+    const data = [
+        {
+          key: '1',
+          store: 'Toberin',
+          notification: 'Whatsapp',
+          frequency: 'Con el evento de no encontrado',
+          date: '20/07/2022',
+        },
+        {
+          key: '2',
+          store: 'Toberin',
+          notification: 'Whatsapp',
+          frequency: 'Con el evento de no encontrado',
+          date: '20/07/2022',
+          
+        },
+        {
+          key: '3',
+          store: 'Toberin',
+          notification: 'Whatsapp',
+          frequency: 'Con el evento de no encontrado',
+          date: '20/07/2022',
+          
+        },
+      ];
+        
+
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [visible, setVisible] = useState(false);
   const [size, setSize] = useState();
+  const [selectedStores, setSelectedStores] = useState(null);
   
 
   const showDrawer = () => {
@@ -22,6 +56,12 @@ function ConfigNotifications() {
   const onClose = () => {
     setVisible(false);
   };
+  const stores = [
+    { name: 'Av chilacos', code: 'ac' },
+    { name: 'Toberin', code: 'tb' },
+    { name: 'Cluster Antioquia', code: 'ca' }
+];
+
 
 
   return (
@@ -66,6 +106,27 @@ function ConfigNotifications() {
             </div>
             
             <Drawer title="Configurar nueva alerta" size={size} placement="right" onClose={onClose} visible={visible}>
+            <div>
+                <p>Tienda</p>
+            </div> 
+
+            <div>
+              <p>Reglas de la consulta</p>
+              <Table dataSource={data}>
+                <Column title="Variable" dataIndex="key" key="key" />
+                <Column title="Valor" dataIndex="store" key="store" />        
+                <Column
+                title="Action"
+                key="action"
+                render={(text, record) => (
+                    <Space size="middle">
+                    <a>Delete</a>
+                    </Space>
+                )}
+                />
+            </Table>
+
+            </div>
             
             </Drawer>
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import 'antd/dist/antd.css';
-import { Table, Tag, Space } from 'antd';
+import { Table, Space } from 'antd';
 
 const { Column, ColumnGroup } = Table;
 
