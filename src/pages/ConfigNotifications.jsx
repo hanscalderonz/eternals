@@ -310,6 +310,11 @@ const handleChangeStore = (event) => {
                     
 
             </div>
+
+            <div>
+              <Button type="primary">Primary Button</Button>
+              <Button>Default Button</Button>
+            </div>
             
             </Drawer>
 
