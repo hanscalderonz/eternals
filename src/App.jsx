@@ -11,6 +11,7 @@ import './charts/ChartjsConfig';
 
 // Import pages
 import Dashboard from './pages/Dashboard';
+import ConfigNotifications from './pages/ConfigNotifications';
 
 function App() {
 
@@ -26,6 +27,7 @@ function App() {
     <>
       <Routes>
         <Route exact path="/" element={<Dashboard />} />
+        <Route exact path='/setup-notifications' element={<ConfigNotifications />} />
       </Routes>
     </>
   );
