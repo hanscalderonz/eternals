@@ -16,6 +16,7 @@ import InputLabel from '@mui/material/InputLabel';
 import { Table } from 'antd';
 import { IoCalendarOutline } from "react-icons/io5";
 import { ImStack, ImFileText2 } from "react-icons/im";
+import Edittable from '../partials/dashboard/Edittable';
 const { Column } = Table;
 const { RangePicker } = DatePicker;
  
@@ -25,7 +26,7 @@ function ConfigNotifications() {
     const data = [
         {
           key: '1',
-          store: 'Toberin',
+          store: 'OOS',
           notification: 'Whatsapp',
           frequency: 'Con el evento de no encontrado',
           date: '20/07/2022',
@@ -205,20 +206,8 @@ const handleChangeStore = (event) => {
               <p className='mb-0'><b>Reglas de la consulta</b></p>
              </div>  
                
-              <Table pagination={false} dataSource={data}>
-                <Column title="Variable" dataIndex="key" key="key" />
-                <Column title="Valor" dataIndex="store" key="store" />
-        
-                <Column
-                title="Action"
-                key="action"
-                render={(text, record) => (
-                    <Space size="middle">
-                    <a>Delete</a>
-                    </Space>
-                )}
-                />
-            </Table>
+            
+            <Edittable />
 
             </div>
 
@@ -248,8 +237,8 @@ const handleChangeStore = (event) => {
             </div>   
             
             <div className='flex gap-3 '>
-               <Input style={{ width: '40%' }} defaultValue="10:00" />:
-               <Input style={{ width: '40%' }} defaultValue="5:00" />
+               <Input style={{ width: '40%' }} defaultValue="10" />:
+               <Input style={{ width: '40%' }} defaultValue="5" />
             </div>
 
             <div className='flex items-center'>
@@ -267,7 +256,7 @@ const handleChangeStore = (event) => {
 
             </div>
 
-            <div className='grid grid-cols-3 mt-10' >
+            <div className='grid grid-cols-3 mt-10 gap-5 items-center' >
             <div className='flex items-center gap-2'>
             <IoCalendarOutline /> 
             <p className='mb-0'><b>Alerta Activa</b></p>
@@ -280,7 +269,11 @@ const handleChangeStore = (event) => {
             onChange={onChange}
             onOk={onOk}
             />  
-            </div>          
+            </div>
+
+              <div >
+                <Checkbox value="PM">Sin vencimiento</Checkbox>
+                </div>
             </div>
 
             <div className='flex items-center mt-10 gap-10'>
@@ -311,9 +304,12 @@ const handleChangeStore = (event) => {
 
             </div>
 
-            <div>
-              <Button type="primary">Primary Button</Button>
-              <Button>Default Button</Button>
+            <div className="flex mt-5 justify-end gap-1">
+              <div><Button>Limpiar config</Button></div>
+              <div><Button type="primary">Configurar alerta</Button></div>
+
+              
+              
             </div>
             
             </Drawer>
