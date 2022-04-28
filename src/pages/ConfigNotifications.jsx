@@ -3,16 +3,17 @@ import Sidebar from '../partials/Sidebar';
 import Header from '../partials/Header';
 import TableNotifications from '../partials/dashboard/TableNotifications';
 import { Menu } from 'antd';
-import { Drawer, Button, Space, Radio } from 'antd';
+import { Drawer, Button, Space, Radio, Input, Checkbox, Row, Col, DatePicker } from 'antd';
 import {PlusOutlined} from '@ant-design/icons'
 
 import { MultiSelect } from 'primereact/multiselect';
 import { Table } from 'antd';
-
+import { IoCalendarOutline } from "react-icons/io5";
+import { ImStack, ImFileText2 } from "react-icons/im";
 const { Column, ColumnGroup } = Table;
+const { RangePicker } = DatePicker;
  
                  
-                  
 function ConfigNotifications() {
 
     const data = [
@@ -53,6 +54,17 @@ function ConfigNotifications() {
     setSize('large');
   };
 
+  function onChange(checkedValues) {
+    console.log('checked = ', checkedValues);
+  }
+  function onChangeDate(value, dateString) {
+    console.log('Selected Time: ', value);
+    console.log('Formatted Selected Time: ', dateString);
+  }
+  function onOk(value) {
+    console.log('onOk: ', value);
+  }
+  
   const onClose = () => {
     setVisible(false);
   };
@@ -105,16 +117,22 @@ function ConfigNotifications() {
             </Button>
             </div>
             
-            <Drawer title="Configurar nueva alerta" size={size} placement="right" onClose={onClose} visible={visible}>
+            <Drawer
+             title="Configurar nueva alerta" size={size} placement="right" onClose={onClose} visible={visible}>
             <div>
                 <p>Tienda</p>
             </div> 
 
             <div>
-              <p>Reglas de la consulta</p>
-              <Table dataSource={data}>
+            <div className='flex items-center gap-2 mb-6'>
+            <ImFileText2 />
+              <p className='mb-0'>Reglas de la consulta</p>
+             </div>  
+               
+              <Table pagination={false} dataSource={data}>
                 <Column title="Variable" dataIndex="key" key="key" />
-                <Column title="Valor" dataIndex="store" key="store" />        
+                <Column title="Valor" dataIndex="store" key="store" />
+        
                 <Column
                 title="Action"
                 key="action"
@@ -125,6 +143,76 @@ function ConfigNotifications() {
                 )}
                 />
             </Table>
+
+            </div>
+
+            <div className=' grid grid-cols-3 gap-2 mt-10'>
+             <div className='flex items-center gap-2'>
+             <IoCalendarOutline />    
+             <p className='mb-0'> Frecuencia de la consulta</p>    
+            </div>   
+            
+            <div className='flex gap-3 '>
+               <Input style={{ width: '40%' }} defaultValue="10:00" />:   
+               <Input style={{ width: '40%' }} defaultValue="5:00" />   
+            </div>
+
+            <div className='flex items-center'>
+            <Checkbox.Group onChange={onChange}>
+            <Row>
+            <Col>
+                <Checkbox value="AM">AM</Checkbox>
+            </Col>
+            <Col>
+                <Checkbox value="PM">PM</Checkbox>
+            </Col>
+            </Row>
+        </Checkbox.Group>   
+            </div>
+
+            </div>
+
+            <div className='grid grid-cols-3 mt-10' >
+            <div className='flex items-center gap-2'>
+            <IoCalendarOutline /> 
+            <p className='mb-0'>Alerta Activa</p>    
+            </div>  
+
+            <div>
+            <RangePicker
+            showTime={{ format: 'HH:mm' }}
+            format="YYYY-MM-DD HH:mm"
+            onChange={onChange}
+            onOk={onOk}
+            />  
+            </div>          
+            </div>
+
+            <div className='flex items-center mt-10 gap-10'>
+                <div className='flex items-center gap-2 '>
+                 <ImStack />   
+                <p className='mb-0'>Canal</p>    
+                </div>
+                <div className='flex items-center'>
+                <Checkbox.Group onChange={onChange}>
+                <Row className='flex gap-6'>
+                <Col>
+                    <Checkbox value="AM">Whatsapp</Checkbox>
+                </Col>
+                <Col>
+                    <Checkbox value="PM">SMS</Checkbox>
+                </Col>
+                <Col>
+                    <Checkbox value="EM">Email</Checkbox>
+                </Col>
+
+                <Col>
+                <Checkbox value="ND">Notification Desktop</Checkbox>
+                </Col>
+                </Row>
+            </Checkbox.Group>   
+            </div>
+                    
 
             </div>
             

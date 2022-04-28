@@ -31,7 +31,7 @@ const data = [
 ];
 
 export default () => (
-  <Table dataSource={data}>
+  <Table pagination={false} dataSource={data}>
       <Column title="ID" dataIndex="key" key="key" />
       <Column title="Store" dataIndex="store" key="store" />
       <Column title="Notification" dataIndex="notification" key="notification" />

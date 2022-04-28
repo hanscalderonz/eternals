@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
-
 import Sidebar from '../partials/Sidebar';
 import Header from '../partials/Header';
-
 import Datepicker from '../partials/actions/Datepicker';
 import OosProducts from '../partials/dashboard/OosProducts';
 import TopProducts from '../partials/dashboard/TopProducts';
